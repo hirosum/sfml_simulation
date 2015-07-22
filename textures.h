@@ -8,19 +8,22 @@
 #ifndef TEXTURES_H
 #define	TEXTURES_H
 #include <SFML/Graphics.hpp>
-class TextureHandler {
+class TextureManager {
 public:
-    TextureHandler();
-    ~TextureHandler();
+    TextureManager();
+    ~TextureManager();
     const sf::Texture& getTexture(const std::string& filename);
     void deleteTexture(const sf::Texture& texture);
     void deleteTexture(const std::string& filename);
+    void addResourceDirectory(const std::string& directory);
+    void removeResourceDirectory(const std::string& directory);
 private:
-    TextureHandler(TextureHandler const&);
-    void operator=(TextureHandler const&);
+    TextureManager(TextureManager const&);
+    void operator=(TextureManager const&);
     void setUpTextures();
-    std::map< std::string, sd::Texture > textures;
-}
+    std::map< std::string, sf::Texture > textures;
+    std::vector< std::string > resourceDirectories;
+};
 
 
 #endif	/* TEXTURES_H */

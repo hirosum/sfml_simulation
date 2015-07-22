@@ -2,7 +2,7 @@
 #include <iostream>
 #include "textures.h"
 
-const sf::Texture& TextureHandler::getTexture(const std::string& filename)
+const sf::Texture& TextureManager::getTexture(const std::string& filename)
 {
     for( std::map<std::string, sf::Texture>::const_iterator it = textures.begin();
     it != textures.end();
@@ -28,7 +28,7 @@ const sf::Texture& TextureHandler::getTexture(const std::string& filename)
     return textures[filename];
 }
 
-void TextureHandler::deleteTexture(const sf::Texture& texture)
+void TextureManager::deleteTexture(const sf::Texture& texture)
 {
     for(std::map<std::string, sf::Texture>::const_iterator it = textures.begin();
             it != textures.end();
@@ -42,13 +42,35 @@ void TextureHandler::deleteTexture(const sf::Texture& texture)
     }
 }
 
-void TextureHandler::deleteTexture(const std::string& filename)
+void TextureManager::deleteTexture(const std::string& filename)
 {
     std::map<std::string, sf::Texture>::const_iterator it = textures.find(filename);
     if(it != textures.end())
         textures.erase(it);
 }
 
-    
+void TextureManager::addResourceDirectory(const std::string& directory)
+{
+    for(std::vector<std::string>::const_iterator it = resourceDirectories.begin();
+            it != resourceDirectories.end();
+            ++it)
+    {
+        if(directory == (*it))
+                return;
+    }
+    resourceDirectories.push_back(directory);
+}
+
+void TextureManager::removeResourceDirectory(const std::string& directory)
+{
+    for(std::vector< std::string>::const_iterator it = resourceDirectories.begin();
+            it !- resourceDirectories.end(); )
+    {
+        if(directory == (*it))
+            it = resourceDirectories.erase(it);
+        else
+            ++it; 
+   }
+}
 
 
