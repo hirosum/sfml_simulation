@@ -7,8 +7,8 @@
 
 #ifndef GAME_H
 #define	GAME_H
-#include <SFML/Graphics.hpp>
 #include "map.h"
+#include "textures.h"
 
 class Game {
 public:
@@ -21,6 +21,8 @@ private:
     sf::RenderWindow* window;
     void renderMap();
     Map gameMap;
+    TextureManager textureManager;
+    void setUpTextures();
 };
 
 #endif	/* GAME_H */

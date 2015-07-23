@@ -8,10 +8,13 @@
 #ifndef TEXTURES_H
 #define	TEXTURES_H
 #include <SFML/Graphics.hpp>
+
 class TextureManager {
 public:
-    TextureManager();
-    ~TextureManager();
+    //TODO check if this is correct
+    TextureManager(){}
+    //TODO figure out what goes in the destructor
+    ~TextureManager(){}
     const sf::Texture& getTexture(const std::string& filename);
     void deleteTexture(const sf::Texture& texture);
     void deleteTexture(const std::string& filename);

@@ -1,12 +1,15 @@
 
+#include <SFML/Graphics/Texture.hpp>
+
+
 #include <iostream>
 #include "textures.h"
 
 const sf::Texture& TextureManager::getTexture(const std::string& filename)
 {
-    for( std::map<std::string, sf::Texture>::const_iterator it = textures.begin();
-    it != textures.end();
-    ++it)
+    for( std::map< std::string, sf::Texture >::const_iterator it = textures.begin();
+        it != textures.end();
+        ++it)
     {
         if(filename == it->first)
         {
@@ -36,7 +39,7 @@ void TextureManager::deleteTexture(const sf::Texture& texture)
     {
         if(&texture == &it->second)
         {
-            textures.erase(it);
+            textures.erase( it );
             return;
         }
     }
@@ -46,7 +49,7 @@ void TextureManager::deleteTexture(const std::string& filename)
 {
     std::map<std::string, sf::Texture>::const_iterator it = textures.find(filename);
     if(it != textures.end())
-        textures.erase(it);
+        textures.erase( it );
 }
 
 void TextureManager::addResourceDirectory(const std::string& directory)
@@ -63,11 +66,11 @@ void TextureManager::addResourceDirectory(const std::string& directory)
 
 void TextureManager::removeResourceDirectory(const std::string& directory)
 {
-    for(std::vector< std::string>::const_iterator it = resourceDirectories.begin();
-            it !- resourceDirectories.end(); )
+    for( std::vector< std::string >::iterator it = resourceDirectories.begin();
+            it != resourceDirectories.end(); )
     {
-        if(directory == (*it))
-            it = resourceDirectories.erase(it);
+        if(directory == (*it) )
+            it = resourceDirectories.erase( it );
         else
             ++it; 
    }

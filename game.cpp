@@ -4,10 +4,10 @@
 
 void Game::initialize(sf::RenderWindow* wind){
     
-    textures::setUpTextures();
     gameMap = Map(50,37,16,16);
     gameMap.generateMap();
     window = wind;
+    setUpTextures();
 }
 
 void Game::loop()
@@ -44,5 +44,32 @@ void Game::renderMap()
 
 void Game::physicsAndLogic()
 {
-    
+    std::vector<GrassTile*> grassTiles = gameMap.getGrassTiles();
+    for(std::vector<GrassTile*>::iterator it = grassTiles.begin();
+            it != grassTiles.end();
+            ++it)
+    {
+        (*it)->checkForGrowth();
+    }
+}
+
+void Game::setUpTextures()
+{
+    for(int i=0; i<gameMap.getMapSize().x; i++)
+    {
+        for(int j=0; j<gameMap.getMapSize().y;j++)
+        {
+            Tile* tilePtr = gameMap.getTilePtr(i,j); 
+            switch(tilePtr->getTileType())
+            {
+                case 0:
+                    tilePtr->setSpriteTexture(textureManager.getTexture("images/grass_01.png"));
+                    break;
+                default:
+                    std::cout << "Error: Tile has invalid type.\n";
+                    break;
+            }
+                
+        }
+    }
 }
