@@ -17,23 +17,44 @@ class GameObject {
 public:
     GameObject(){}
     GameObject(float posX, float posY);
+    sf::Sprite* getSpritePtr();
 private:
-    sf::Vector2f position; 
+    sf::Vector2i tilePosition;
+    sf::Vector2f position;
+    sf::Sprite sprite;
 };
 
 enum MobState {
     IDLE = 0,
+    WALKING,
     HUNGRY,
     EATING
+};
+
+enum ActionResult {
+    DIE = 0,
+    EATGRASS,
+    NOTHING
 };
 
 class Mob : public GameObject
 {
 public:
     Mob(){}
-    Mob(float posX, float posY);
+    Mob(float posX, float posY, float pSpeed);
+    int getState();
+    int takeAction();
 private:
+    int idleTimer;
+    int idleTimer;
+    MobState state;
     float speed;
+    sf::Vector2f destination;
+    void move();
+    void eat();
+    void idle();
+    void findFood();
+    void findPath();
 };
 
 #endif	/* GAME_OBJECT_H */

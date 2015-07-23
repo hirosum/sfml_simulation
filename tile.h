@@ -46,6 +46,7 @@ public:
     GrassTile(float,float,unsigned int);
     void            checkForGrowth();
 private:
+    int             growthChanceTime;
     int             timeSinceGrowthChance;
     int             growthLevel;
     void            grow();

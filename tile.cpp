@@ -31,16 +31,17 @@ int Tile::getTileType()
 
 GrassTile::GrassTile(float pX, float pY, unsigned int tType) : Tile(pX,pY,tType)
 {
-    timeSinceGrowthChance = 0;
+    growthChanceTime = 1000;
+    timeSinceGrowthChance = rand() % growthChanceTime;
     growthLevel = 0;
 }
 
 void GrassTile::checkForGrowth()
 {
-    int willGrow = rand() % 10000;
-    if(timeSinceGrowthChance >= 300 && growthLevel < 3)
+    int willGrow = rand() % 1000;
+    if(timeSinceGrowthChance >= growthChanceTime && growthLevel < 3)
     {
-        if(willGrow >= 9999)
+        if(willGrow >= 950)
             grow();
         timeSinceGrowthChance = 0;
     }
