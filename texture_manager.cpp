@@ -3,7 +3,7 @@
 
 
 #include <iostream>
-#include "textures.h"
+#include "texture_manager.h"
 
 const sf::Texture& TextureManager::getTexture(const std::string& filename)
 {

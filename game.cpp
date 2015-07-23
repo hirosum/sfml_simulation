@@ -1,5 +1,5 @@
 #include "game.h"
-#include "textures.h"
+#include "texture_manager.h"
 #include "map.h"
 
 void Game::initialize(sf::RenderWindow* wind){
@@ -12,6 +12,7 @@ void Game::initialize(sf::RenderWindow* wind){
 
 void Game::loop()
 {
+    delta = 0;
     while(window->isOpen()){
         sf::Event event;
         while (window->pollEvent(event))
@@ -72,4 +73,8 @@ void Game::setUpTextures()
                 
         }
     }
+}
+Game::~Game()
+{
+    
 }

@@ -5,10 +5,13 @@
  * Created on 22 July 2015, 13:51
  */
 
-#ifndef TEXTURES_H
-#define	TEXTURES_H
+#ifndef TEXTURE_MANAGER_H
+#define	TEXTURE_MANAGER_H
 #include <SFML/Graphics.hpp>
 
+/*
+ * Class which ensures that each texture is only loaded once
+ */
 class TextureManager {
 public:
     //TODO check if this is correct

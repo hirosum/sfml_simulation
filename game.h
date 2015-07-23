@@ -8,11 +8,12 @@
 #ifndef GAME_H
 #define	GAME_H
 #include "map.h"
-#include "textures.h"
+#include "texture_manager.h"
 
 class Game {
 public:
     Game(){}
+    ~Game();
     void initialize(sf::RenderWindow*);
     void loop();
     void render();
@@ -23,6 +24,7 @@ private:
     Map gameMap;
     TextureManager textureManager;
     void setUpTextures();
+    float delta;
 };
 
 #endif	/* GAME_H */

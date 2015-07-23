@@ -2,11 +2,10 @@
 
 Map::Map(int sX, int sY,int tSizeX, int tSizeY)
 {
-    sizeX       = sX;
-    sizeY       = sY;
-    tileSizeX   = tSizeX;
-    tileSizeY   = tSizeY;
-    
+    mapSize.x       = sX;
+    mapSize.y       = sY;
+    tileSize.x   = tSizeX;
+    tileSize.y  = tSizeY;
 }
 Map::~Map()
 {
@@ -27,11 +26,11 @@ Map::~Map()
 void Map::generatePlains()
 {
     std::vector<Tile*> tempVector;
-    for(int i=0; i<sizeX; i++)
+    for(int i=0; i<mapSize.x; i++)
     {
-        for(int j=0; j<sizeY; j++)
+        for(int j=0; j<mapSize.y; j++)
         {
-            GrassTile* grassTile = new GrassTile(i*tileSizeX,j*tileSizeY,0);
+            GrassTile* grassTile = new GrassTile(i*tileSize.x,j*tileSize.y,0);
             tempVector.push_back(grassTile);
             grassTiles.push_back(grassTile);
         }
@@ -47,7 +46,7 @@ void Map::generateMap()
 
 sf::Vector2i Map::getMapSize()
 {
-    return sf::Vector2i(sizeX,sizeY);
+    return mapSize;
 }
 
 Tile* Map::getTilePtr(int x, int y)

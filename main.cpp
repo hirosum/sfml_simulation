@@ -11,7 +11,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    
+    srand(time(NULL));
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
     Game game;
     game.initialize(&window);

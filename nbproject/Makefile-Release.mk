@@ -36,9 +36,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/game.o \
+	${OBJECTDIR}/game_object.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/map.o \
-	${OBJECTDIR}/textures.o \
+	${OBJECTDIR}/texture_manager.o \
 	${OBJECTDIR}/tile.o
 
 
@@ -71,6 +72,11 @@ ${OBJECTDIR}/game.o: game.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/game.o game.cpp
 
+${OBJECTDIR}/game_object.o: game_object.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/game_object.o game_object.cpp
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -81,10 +87,10 @@ ${OBJECTDIR}/map.o: map.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/map.o map.cpp
 
-${OBJECTDIR}/textures.o: textures.cpp 
+${OBJECTDIR}/texture_manager.o: texture_manager.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/textures.o textures.cpp
+	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/texture_manager.o texture_manager.cpp
 
 ${OBJECTDIR}/tile.o: tile.cpp 
 	${MKDIR} -p ${OBJECTDIR}
