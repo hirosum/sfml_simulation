@@ -6,7 +6,9 @@
                    projectFiles="true">
       <itemPath>game.h</itemPath>
       <itemPath>game_object.h</itemPath>
+      <itemPath>gui_item.h</itemPath>
       <itemPath>map.h</itemPath>
+      <itemPath>renderer.h</itemPath>
       <itemPath>texture_manager.h</itemPath>
       <itemPath>tile.h</itemPath>
     </logicalFolder>
@@ -19,8 +21,11 @@
                    projectFiles="true">
       <itemPath>game.cpp</itemPath>
       <itemPath>game_object.cpp</itemPath>
+      <itemPath>gui_item.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>map.cpp</itemPath>
+      <itemPath>map_editor.cpp</itemPath>
+      <itemPath>renderer.cpp</itemPath>
       <itemPath>texture_manager.cpp</itemPath>
       <itemPath>tile.cpp</itemPath>
     </logicalFolder>
@@ -69,11 +74,21 @@
       </item>
       <item path="game_object.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="gui_item.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="gui_item.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="map.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="map_editor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="renderer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="renderer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="texture_manager.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -125,11 +140,21 @@
       </item>
       <item path="game_object.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="gui_item.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="gui_item.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="map.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="map_editor.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="renderer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="renderer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="texture_manager.cpp" ex="false" tool="1" flavor2="0">
       </item>

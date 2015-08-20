@@ -37,8 +37,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/game.o \
 	${OBJECTDIR}/game_object.o \
+	${OBJECTDIR}/gui_item.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/map.o \
+	${OBJECTDIR}/map_editor.o \
+	${OBJECTDIR}/renderer.o \
 	${OBJECTDIR}/texture_manager.o \
 	${OBJECTDIR}/tile.o
 
@@ -77,6 +80,11 @@ ${OBJECTDIR}/game_object.o: game_object.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/game_object.o game_object.cpp
 
+${OBJECTDIR}/gui_item.o: gui_item.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gui_item.o gui_item.cpp
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -86,6 +94,16 @@ ${OBJECTDIR}/map.o: map.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/map.o map.cpp
+
+${OBJECTDIR}/map_editor.o: map_editor.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/map_editor.o map_editor.cpp
+
+${OBJECTDIR}/renderer.o: renderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/renderer.o renderer.cpp
 
 ${OBJECTDIR}/texture_manager.o: texture_manager.cpp 
 	${MKDIR} -p ${OBJECTDIR}

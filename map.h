@@ -9,8 +9,13 @@
 #ifndef MAP_H
 #define	MAP_H
 
+#include <memory>
 #include <vector>
 #include "tile.h"
+#include "texture_manager.h"
+
+typedef std::shared_ptr<Tile>       TilePtr;
+typedef std::shared_ptr<GrassTile>  GrassPtr;
 
 /*
  * Class which represents the map of the game.
@@ -25,16 +30,17 @@ public:
     Map(){}
     Map(int,int,int,int);
     ~Map();
-    void generateMap();
-    sf::Vector2i getMapSize();
-    Tile* getTilePtr(int,int);
-    std::vector< GrassTile* > getGrassTiles();
+    void                                generateMap();
+    sf::Vector2i                        getMapSize();
+    TilePtr                             getTilePtr(int,int);
+    void                                checkMapForGrowth();
+    void                                setUpTextures(TextureManager& textMan);
 private:
-    sf::Vector2i mapSize;
-    sf::Vector2i tileSize;
-    std::vector < std::vector < Tile* > > map;
-    std::vector< GrassTile* > grassTiles;
-    void generatePlains();
+    sf::Vector2i                        mapSize;
+    sf::Vector2i                        tileSize;
+    std::vector<std::vector<TilePtr>>   map;
+    std::vector<GrassPtr>               grassTiles;
+    void                                generatePlains();
 };
 
 #endif	/* MAP_H */

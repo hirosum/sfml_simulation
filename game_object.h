@@ -9,20 +9,6 @@
 
 #ifndef GAME_OBJECT_H
 #define	GAME_OBJECT_H
-/*
- * Class to represent each object in the game e.g. mobs
- * Contains the object's position
- */
-class GameObject {
-public:
-    GameObject(){}
-    GameObject(float posX, float posY);
-    sf::Sprite* getSpritePtr();
-private:
-    sf::Vector2i tilePosition;
-    sf::Vector2f position;
-    sf::Sprite sprite;
-};
 
 enum MobState {
     IDLE = 0,
@@ -37,24 +23,45 @@ enum ActionResult {
     NOTHING
 };
 
+
+/*
+ * Class to represent each object in the game e.g. mobs
+ * Contains the object's position
+ */
+class GameObject {
+public:
+    GameObject(){}
+    GameObject(float posX, float posY,int tileSizeX, int tileSizeY);
+    void            setSpriteTexture(const sf::Texture& pTexture);
+    sf::Sprite*     getSpritePtr();
+protected:
+    sf::Texture texture;
+    sf::Vector2f    posPoint;
+    sf::Vector2i    posTile;
+    sf::IntRect     spriteRect;
+    sf::Vector2i    tileSize;
+    sf::Sprite      sprite;
+    bool            hasSprite;
+    void            centerOfTileFromPoint(sf::Vector2f& point);
+};
 class Mob : public GameObject
 {
 public:
     Mob(){}
-    Mob(float posX, float posY, float pSpeed);
-    int getState();
-    int takeAction();
+    Mob(float posX, float posY, float pSpeed, int tileSizeX, int tileSizeY);
+    int             getState();
+    int             takeAction();
 private:
-    int idleTimer;
-    int idleTimer;
-    MobState state;
-    float speed;
-    sf::Vector2f destination;
-    void move();
-    void eat();
-    void idle();
-    void findFood();
-    void findPath();
+    int             idleTimer;
+    sf::Vector2i    destTile;
+    MobState        state;
+    float           speed;
+    sf::Vector2f    destPoint;
+    void            move();
+    void            idle();
+    void            findPath();
+    bool            findFood();
+    bool            eat();
 };
 
 #endif	/* GAME_OBJECT_H */

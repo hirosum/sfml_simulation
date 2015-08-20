@@ -4,12 +4,17 @@
  *
  * Created on 22 July 2015, 09:29
  */
+#ifndef SMFL
+#define SMFL
+
+#include <SFML/Graphics.hpp>
+
+#endif
 #ifndef TILE_H
 #define	TILE_H
 
 #include <string>
 #include <iostream>
-#include <SFML/Graphics.hpp>
 
 enum TileType {
     GRASS = 0
@@ -33,6 +38,7 @@ protected:
     TileType        tileType;
     sf::Sprite      sprite;   
     sf::IntRect     spriteRect;
+    bool            hasSprite;
 };
 
 /*

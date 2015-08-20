@@ -10,18 +10,24 @@ Tile::Tile(float pX, float pY, unsigned int tType)
     position.x = pX;
     position.y = pY;
     tileType = (TileType)tType;
-    sprite.setPosition(position);
-    spriteRect = sf::IntRect(0,0,64,64);            
+    hasSprite = true; 
 }
 
 sf::Sprite* Tile::getSprite()
 {
-    return &sprite;
+    if(hasSprite)
+        return &sprite;
+    else
+        return NULL;
 }
 void Tile::setSpriteTexture(const sf::Texture& pTexture)
 {
+    hasSprite = true; 
+    sprite.setPosition(position);
+    spriteRect  = sf::IntRect(0,0,64,64);
     sprite.setTexture(pTexture);
     sprite.setTextureRect(spriteRect);
+    sprite.setScale(0.25f,0.25f);
 }
 
 int Tile::getTileType()

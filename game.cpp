@@ -7,7 +7,12 @@ void Game::initialize(sf::RenderWindow* wind){
     gameMap = Map(50,37,16,16);
     gameMap.generateMap();
     window = wind;
-    setUpTextures();
+    renderer = Renderer(wind);
+    setUpMenus();
+//    auto mob = std::unique_ptr<Mob>(new Mob(43.11f, 145.0f, 1.0f, 64,64));
+//    mobs.push_back(std::move(mob));
+    setUpTexturesAndSprites();
+    currentMode = MAINMENU;
 }
 
 void Game::loop()
@@ -20,17 +25,32 @@ void Game::loop()
             if (event.type == sf::Event::Closed)
                 window->close();
         }
-        physicsAndLogic();
-        render();
+        
+        drawable.clear();
+        switch (currentMode)
+        {
+                case MAINMENU:
+                    addMainMenuToDrawable(1);                    
+                    break;
+                case GAMERUNNING:
+                    physicsAndLogic();
+                    addMapToDrawable(0);
+                    addGameObjectsToDrawable(1);
+                    addGameInterfaceToDrawable(2);
+                    break;
+                case PAUSED:
+                    addGameObjectsToDrawable(1);
+                    addGameInterfaceToDrawable(2);
+                    addPauseMenuToDrawable(3);
+                    break;
+        }         
+        renderer.drawScene(drawable);
     }
 }
 void Game::render(){
-    window->clear();
-    renderMap();
-    window->display();
 }
 
-void Game::renderMap()
+void Game::addMapToDrawable(int  order)
 {
     int sizeX = gameMap.getMapSize().x;
     int sizeY = gameMap.getMapSize().y;
@@ -38,43 +58,117 @@ void Game::renderMap()
     {
         for(int j=0;j<sizeY;j++)
         {
-            window->draw(*gameMap.getTilePtr(i,j)->getSprite());
+            Drawable draw;
+            draw.sprite = gameMap.getTilePtr(i,j)->getSprite();
+            draw.z      = order;
+            if(draw.sprite != NULL)
+                    drawable.push_back(draw); 
         }
     }
 }
 
 void Game::physicsAndLogic()
 {
-    std::vector<GrassTile*> grassTiles = gameMap.getGrassTiles();
-    for(std::vector<GrassTile*>::iterator it = grassTiles.begin();
-            it != grassTiles.end();
+    gameMap.checkMapForGrowth();
+}
+
+void Game::setUpTexturesAndSprites()
+{   
+    gameMap.setUpTextures(textureManager);
+    
+    for(std::vector<MobPtr>::iterator it = mobs.begin();
+            it != mobs.end();
             ++it)
     {
-        (*it)->checkForGrowth();
+        
+        (*it)->setSpriteTexture(textureManager.getTexture("images/char.png"));
+        
+    }
+    for(std::vector<GuiPtr>::iterator it = mainMenu.begin();
+            it != mainMenu.end();
+            ++it)
+    {
+        (*it)->setSpriteTexture(textureManager.getTexture("images/" + (*it)->getName() + ".png"));
+        
     }
 }
 
-void Game::setUpTextures()
+void Game::setUpMenus()
 {
-    for(int i=0; i<gameMap.getMapSize().x; i++)
-    {
-        for(int j=0; j<gameMap.getMapSize().y;j++)
-        {
-            Tile* tilePtr = gameMap.getTilePtr(i,j); 
-            switch(tilePtr->getTileType())
-            {
-                case 0:
-                    tilePtr->setSpriteTexture(textureManager.getTexture("images/grass_01.png"));
-                    break;
-                default:
-                    std::cout << "Error: Tile has invalid type.\n";
-                    break;
-            }
-                
-        }
-    }
+    typedef std::unique_ptr<Button> ButtonPtr;
+    mainMenu.push_back(ButtonPtr(new Button(1344.0f,300.0f,"new_game_button",256,64)));
 }
-Game::~Game()
+
+void Game::addGameObjectsToDrawable(int order)
 {
     
+    for(std::vector<std::unique_ptr<Mob>> ::iterator it = mobs.begin();
+            it != mobs.end();
+            ++it)
+    {
+        Drawable draw;
+        draw.sprite = (*it)->getSpritePtr();
+        draw.z      = order;
+        if(draw.sprite != NULL)
+                drawable.push_back(draw); 
+    }
+}
+
+void Game::addMainMenuToDrawable(int order)
+{
+    for(std::vector<std::unique_ptr<GuiItem>>::iterator it = mainMenu.begin();
+            it != mainMenu.end();
+            ++it)
+    {
+        Drawable draw;
+//        draw.sprite = (*it)->getSprite();
+        draw.sprite = (*it)->getSprite();
+        draw.z      = order;
+        if(draw.sprite != NULL)
+                drawable.push_back(draw);      
+    }
+    
+}
+
+void Game::addPauseMenuToDrawable(int order)
+{
+    
+}
+
+void Game::addGameInterfaceToDrawable(int order)
+{
+    for(std::vector<std::unique_ptr<GuiItem>>::iterator it = gameInterface.begin();
+            it != gameInterface.end();
+            ++it)
+    {
+        Drawable draw;
+//        draw.sprite = (*it)->getSprite();
+        draw.sprite = (*it)->getSprite();
+        draw.z      = order;
+        if(draw.sprite != NULL)
+                drawable.push_back(draw);      
+    }    
+}
+
+Game::~Game()
+{
+//    for(std::vector<GameObject*>::iterator it = gameObjects.begin();
+//            it != gameObjects.end();
+//            ++it)
+//    {
+//        delete &it;
+//    }
+//    
+//    for(std::vector<GuiItem*>::iterator it = mainMenu.begin();
+//            it != mainMenu.end();
+//            ++it)
+//    {
+//        delete &it;
+//    }
+//    for(std::vector<Drawable*>::iterator it = drawable.begin();
+//            it != drawable.begin();
+//            ++it)
+//    {
+//        delete &it;
+//    }
 }
