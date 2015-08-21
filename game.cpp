@@ -24,6 +24,8 @@ void Game::loop()
         {
             if (event.type == sf::Event::Closed)
                 window->close();
+            keyboardInput(event);
+            mouseInput(event);
         }
         
         drawable.clear();
@@ -39,6 +41,7 @@ void Game::loop()
                     addGameInterfaceToDrawable(2);
                     break;
                 case PAUSED:
+                    addMapToDrawable(0);
                     addGameObjectsToDrawable(1);
                     addGameInterfaceToDrawable(2);
                     addPauseMenuToDrawable(3);
@@ -150,6 +153,58 @@ void Game::addGameInterfaceToDrawable(int order)
     }    
 }
 
+void Game::keyboardInput(sf::Event event)
+{
+    if (event.type == sf::Event::KeyPressed)
+    {
+        if (event.key.code == sf::Keyboard::Return && currentMode == MAINMENU)
+            currentMode = GAMERUNNING;
+        if (event.key.code == sf::Keyboard::P)
+        {
+            if(currentMode == GAMERUNNING)
+                currentMode = PAUSED;
+            else if(currentMode == PAUSED)
+                currentMode = GAMERUNNING;
+        }
+    }
+}
+
+void Game::mouseInput(sf::Event event)
+{
+    if (event.type == sf::Event::MouseButtonPressed)
+    {
+        if (event.mouseButton.button == sf::Mouse::Left)
+        {
+            switch (currentMode)
+            {
+                case MAINMENU:
+                    for(std::vector<GuiPtr>::iterator it = mainMenu.begin();
+                            it != mainMenu.end();
+                            ++it)
+                    {
+                        if((*it)->getClassName() == "Button")
+                        {
+                            if(isMouseInsideBox((*it)->getBoxFloat()))
+                                std::cout << "Click!\n";
+                        }
+                    }
+                    
+                    break;
+                    
+            }
+        }
+    }
+}
+
+bool Game::isMouseInsideBox(sf::FloatRect box)
+{
+    sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+    if(mousePos.x >= box.left && mousePos.x <= box.left + box.width 
+            && mousePos.y >= box.top && mousePos.y <= box.top + box.height)
+        return true;
+    else
+        return false;
+}
 Game::~Game()
 {
 //    for(std::vector<GameObject*>::iterator it = gameObjects.begin();

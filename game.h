@@ -52,6 +52,10 @@ private:
     void                    addMainMenuToDrawable(int order);
     void                    addPauseMenuToDrawable(int order);
     void                    addGameInterfaceToDrawable(int order);
+    void                    keyboardInput(sf::Event event);
+    void                    mouseInput(sf::Event event);
+    void                    clickButton(std::string buttonName);
+    bool                    isMouseInsideBox(sf::FloatRect box);
 };
 
 #endif	/* GAME_H */

@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/game.o \
 	${OBJECTDIR}/game_object.o \
 	${OBJECTDIR}/gui_item.o \
+	${OBJECTDIR}/keyboard_input.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/map.o \
 	${OBJECTDIR}/map_editor.o \
@@ -84,6 +85,11 @@ ${OBJECTDIR}/gui_item.o: gui_item.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gui_item.o gui_item.cpp
+
+${OBJECTDIR}/keyboard_input.o: keyboard_input.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/keyboard_input.o keyboard_input.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -13,7 +13,8 @@ GuiItem::GuiItem(float posX, float posY, std::string name)
 }
 
 Button::Button(float posX, float posY, std::string name, int sizeX, int sizeY): GuiItem(posX,posY,name)
-{
+{   
+    className = "Button";
     spriteRect = sf::IntRect(0,0,sizeX,sizeY);
     size = sf::Vector2i(sizeX,sizeY);
 }
@@ -35,4 +36,14 @@ void GuiItem::setSpriteTexture(const sf::Texture& pTexture)
     sprite.setTextureRect(spriteRect);
     sprite.setPosition(position.x,position.y);
     sprite.setScale(1.0f,1.0f);
+}
+
+std::string GuiItem::getClassName()
+{
+    return className;
+}
+
+sf::FloatRect GuiItem::getBoxFloat()
+{
+    return sf::FloatRect(position.x,position.y,size.x,size.y);
 }

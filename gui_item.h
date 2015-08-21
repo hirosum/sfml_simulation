@@ -17,19 +17,23 @@ class GuiItem
 {
 public:
     GuiItem(float posX, float posY, std::string name);
-    sf::Vector2f    getPosition();
-    void            setPosition(float x, float y);
-    void            setPosition(sf::Vector2f pos);
-    std::string     getName();
-    void            setSpriteTexture(const sf::Texture& pTexture);
-    sf::Sprite*     getSprite();
+    sf::Sprite*         getSprite();
+    sf::Vector2f        getPosition();
+    sf::FloatRect       getBoxFloat();
+    std::string         getName();
+    std::string         getClassName();
+    void                setSpriteTexture(const sf::Texture& pTexture);
+    void                setPosition(float x, float y);
+    void                setPosition(sf::Vector2f pos);
+    
 protected:
-    sf::Vector2f    position;
-    std::string     itemName;
-    sf::Sprite      sprite;
-    sf::IntRect     spriteRect;
-    sf::Vector2i    size;
-    bool            hasSprite;
+    sf::Vector2f        position;
+    std::string         itemName;
+    sf::Sprite          sprite;
+    sf::IntRect         spriteRect;
+    sf::Vector2i        size;
+    std::string         className;
+    bool                hasSprite;
     
 };
 
